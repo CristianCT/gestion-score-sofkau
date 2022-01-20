@@ -20,12 +20,24 @@ public class QueryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/program/{id}")
+    @Path("/category/{id}")
     public Response get(@PathParam("id") String programId) {
         List<Document> documentList = new ArrayList<>();
         mongoClient.getDatabase("queries")
-                .getCollection("program")
+                .getCollection("category")
                 .find(Filters.eq("_id", programId))
+                .forEach(documentList::add);
+        return Response.ok(documentList.stream().findAny()).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/category")
+    public Response getAll() {
+        List<Document> documentList = new ArrayList<>();
+        mongoClient.getDatabase("queries")
+                .getCollection("category")
+                .find()
                 .forEach(documentList::add);
         return Response.ok(documentList).build();
     }

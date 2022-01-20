@@ -1,11 +1,9 @@
 package co.com.sofka.wsscore.infra.service;
 
-import co.com.sofka.wsscore.usecases.ProcessLogin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import javax.enterprise.context.Dependent;
 import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
