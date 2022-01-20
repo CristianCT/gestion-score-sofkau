@@ -2,6 +2,7 @@ package co.com.sofka.wsscore.infra.materialize;
 
 import co.com.sofka.wsscore.domain.category.events.CategoryCreated;
 import co.com.sofka.wsscore.domain.category.events.ProductAdded;
+import co.com.sofka.wsscore.domain.category.events.ProductAssigned;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.model.Filters;
@@ -40,6 +41,23 @@ public class CategoryHandle {
         document.put("product."+event.getProductId()+".name", event.getName());
         document.put("product."+event.getProductId()+".description", event.getDescription());
         document.put("product."+event.getProductId()+".price", event.getPrice());
+
+        BasicDBObject updateObject = new BasicDBObject();
+        updateObject.put("$set", document);
+
+        mongoClient.getDatabase("queries")
+                .getCollection("category")
+                .updateOne( Filters.eq("_id", event.getAggregateId()), updateObject);
+    }
+
+    @ConsumeEvent(value = "sofkau.category.productassigned", blocking = true)
+    void consumeProductAssigned(ProductAssigned event) {
+        BasicDBObject document = new BasicDBObject();
+        document.put("product."+event.getProductId()+".name", event.getName());
+        document.put("product."+event.getProductId()+".description", event.getDescription());
+        document.put("product."+event.getProductId()+".price", event.getPrice());
+        document.put("product."+event.getProductId()+".link", event.getLink());
+        document.put("product."+event.getProductId()+".image", event.getImage());
 
         BasicDBObject updateObject = new BasicDBObject();
         updateObject.put("$set", document);

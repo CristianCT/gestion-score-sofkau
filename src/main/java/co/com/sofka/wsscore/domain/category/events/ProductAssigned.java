@@ -1,31 +1,24 @@
-package co.com.sofka.wsscore.domain.category.commands;
+package co.com.sofka.wsscore.domain.category.events;
 
-import co.com.sofka.wsscore.domain.generic.Command;
+import co.com.sofka.wsscore.domain.generic.DomainEvent;
 
-public class AssignProductsCommand extends Command {
-    private String categoryId;
+public class ProductAssigned extends DomainEvent {
+
     private String productId;
     private String name;
     private String description;
     private Double price;
+    private String link;
+    private String image;
 
-    public AssignProductsCommand(String categoryId, String productId, String name, String description, Double price) {
-        this.categoryId = categoryId;
+    public ProductAssigned(String productId, String name, String description, Double price, String link, String image) {
+        super("sofkau.category.productassigned");
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    public AssignProductsCommand() {
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+        this.link = link;
+        this.image = image;
     }
 
     public String getProductId() {
@@ -58,5 +51,21 @@ public class AssignProductsCommand extends Command {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

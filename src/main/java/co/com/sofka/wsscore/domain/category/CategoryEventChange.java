@@ -2,6 +2,7 @@ package co.com.sofka.wsscore.domain.category;
 
 import co.com.sofka.wsscore.domain.category.events.CategoryCreated;
 import co.com.sofka.wsscore.domain.category.events.ProductAdded;
+import co.com.sofka.wsscore.domain.category.events.ProductAssigned;
 import co.com.sofka.wsscore.domain.generic.EventChange;
 import java.util.HashSet;
 
@@ -20,6 +21,19 @@ public class CategoryEventChange implements EventChange {
                     event.getName(),
                     event.getDescription(),
                     event.getPrice()
+                )
+            );
+        });
+
+        listener((ProductAssigned event) -> {
+            category.products.add(
+                new Product(
+                    event.getProductId(),
+                    event.getName(),
+                    event.getDescription(),
+                    event.getPrice(),
+                    event.getLink(),
+                    event.getImage()
                 )
             );
         });

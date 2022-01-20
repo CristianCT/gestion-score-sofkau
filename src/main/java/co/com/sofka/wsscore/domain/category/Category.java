@@ -2,6 +2,7 @@ package co.com.sofka.wsscore.domain.category;
 
 import co.com.sofka.wsscore.domain.category.events.CategoryCreated;
 import co.com.sofka.wsscore.domain.category.events.ProductAdded;
+import co.com.sofka.wsscore.domain.category.events.ProductAssigned;
 import co.com.sofka.wsscore.domain.generic.AggregateRoot;
 import co.com.sofka.wsscore.domain.generic.DomainEvent;
 
@@ -34,6 +35,10 @@ public class Category extends AggregateRoot {
 
     public void addProduct(String productId, String name, String description, Double price){
         appendChange(new ProductAdded(productId, name, description, price));
+    }
+
+    public void assignProduct(String productId, String name, String description, Double price, String link, String image){
+        appendChange(new ProductAssigned(productId, name, description, price, link, image));
     }
 
     public void updateProduct(){

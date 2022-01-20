@@ -8,12 +8,23 @@ public class Product {
     private String name;
     private String description;
     private Double price;
+    private String link;
+    private String image;
 
     public Product(String id, String name, String description, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public Product(String id, String name, String description, Double price, String link, String image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.link = link;
+        this.image = image;
     }
 
     public String id() {
@@ -30,6 +41,14 @@ public class Product {
 
     public Double price() {
         return price;
+    }
+
+    public String link() {
+        return link;
+    }
+
+    public String image() {
+        return image;
     }
 
     @Override

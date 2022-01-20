@@ -2,6 +2,7 @@ package co.com.sofka.wsscore.infra.entrypoint;
 
 
 import co.com.sofka.wsscore.domain.category.commands.AddProductCommand;
+import co.com.sofka.wsscore.domain.category.commands.AssignProductCommand;
 import co.com.sofka.wsscore.domain.category.commands.CreateCategoryCommand;
 import io.vertx.mutiny.core.eventbus.EventBus;
 
@@ -30,6 +31,14 @@ public class CommandController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/addProduct")
     public Response executor(AddProductCommand command) {
+        bus.publish(command.getType(), command);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/extractProducts")
+    public Response executor(AssignProductCommand command) {
         bus.publish(command.getType(), command);
         return Response.ok().build();
     }
