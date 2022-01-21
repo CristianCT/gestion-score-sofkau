@@ -4,8 +4,6 @@ import co.com.sofka.wsscore.domain.category.Category;
 import co.com.sofka.wsscore.domain.category.commands.AssignProductCommand;
 import co.com.sofka.wsscore.domain.generic.DomainEvent;
 import co.com.sofka.wsscore.domain.generic.EventStoreRepository;
-import co.com.sofka.wsscore.infra.model.DataResponse;
-import com.google.gson.Gson;
 import org.jboss.logging.Logger;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -19,10 +17,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-/*
- * SE DEBE CONSUMIR Y AGREGAR A LA BASE DE DATOS
- * https://github.com/YeniferG/Gestion-Peliculas_Arquitectura-Limpia
- * */
 @Dependent
 public class ExtractProductUseCase implements Function<AssignProductCommand, List<DomainEvent>> {
 
